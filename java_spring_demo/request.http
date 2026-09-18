@@ -1,0 +1,26 @@
+### Create a new library
+POST http://localhost:8080/library
+Content-Type: application/json
+
+{
+  "name": "Central Library",
+  "location": "Downtown"
+}
+
+### Get all libraries
+GET http://localhost:8080/library
+
+### Get library by ID
+GET http://localhost:8080/library/1
+
+### Update library by ID
+PUT http://localhost:8080/library/1
+Content-Type: application/json
+
+{
+  "name": "City Central Library",
+  "location": "Uptown"
+}
+
+### Delete library by ID
+DELETE http://localhost:8080/library/1
