@@ -1,0 +1,65 @@
+@baseUrl = http://localhost:8080
+
+### 1. Create Employee
+POST {{baseUrl}}/employees
+Content-Type: application/json
+
+{
+  "name": "xyz",
+  "email": "xyz@gmail.com",
+  "department": "IT",
+  "salary": 45000.0
+}
+
+> {% client.global.set("employeeId", response.body.id); %}
+
+### 2. Get All Employees
+GET {{baseUrl}}/employees
+
+### 3. Get Created Employee
+GET {{baseUrl}}/employees/{{employeeId}}
+
+### 4. Update Employee
+PUT {{baseUrl}}/employees/{{employeeId}}
+Content-Type: application/json
+
+{
+  "name": "xyz updated",
+  "email": "xyz_updated@gmail.com",
+  "department": "Engineering",
+  "salary": 55000.0
+}
+
+### 5. Apply for Leave
+POST {{baseUrl}}/leaves
+Content-Type: application/json
+
+{
+  "leaveType": "CASUAL",
+  "startDate": "2026-09-20",
+  "endDate": "2026-09-22",
+  "reason": "Personal work",
+  "status": "PENDING",
+  "student": {
+    "id": {{employeeId}}
+  }
+}
+
+> {% client.global.set("leaveId", response.body.id); %}
+
+### 6. Get All Leave Requests
+GET {{baseUrl}}/leaves
+
+### 7. Get Leave Requests for the Created Employee
+GET {{baseUrl}}/employees/{{employeeId}}/leaves
+
+### 8. Update Leave Status
+PUT {{baseUrl}}/leaves/{{leaveId}}/status
+Content-Type: application/json
+
+{
+  "status": "APPROVED"
+}
+
+### 9. Delete Leave Request
+DELETE {{baseUrl}}/leaves/{{leaveId}}
